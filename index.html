@@ -1,40 +1,323 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="az">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduTrack</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduTrack — Gülzadə Nəzərlinin Akademik İzləmə Platforması</title>
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
+  <!-- Premium Navbar -->
+  <header class="navbar">
+    <div class="container navbar-container" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
+      
+      <!-- LOGO -->
+      <a href="#" class="logo" style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 20px; text-decoration: none;">
+        <span class="logo-icon" style="width: 12px; height: 12px; border-radius: 3px; display: inline-block;"></span>
+        EduTrack
+      </a>
 
-    <h1>🎓 EduTrack</h1>
+      <!-- NAV MENYU -->
+      <nav class="nav-menu" style="display: flex; gap: 20px;">
+        <a href="#home" class="nav-link active" style="text-decoration: none;">Ana səhifə</a>
+        <a href="#about-teacher" class="nav-link" style="text-decoration: none;">Müəllim Haqqında</a>
+        <a href="#features" class="nav-link" style="text-decoration: none;">Xüsusiyyətlər</a>
+        <a href="#how-it-works" class="nav-link" style="text-decoration: none;">Necə işləyir</a>
+      </nav>
 
-    <p>
-        Müəllim • Valideyn • Şagird
-    </p>
-
-    <div class="buttons">
-
-       <button onclick="window.location.href='muellim.html'">
-    Müəllim
-</button>
-        <button>Valideyn</button>
-
-        <button>Şagird</button>
+      <!-- DÜYMƏLƏR -->
+      <div class="nav-actions" style="display: flex; gap: 10px; align-items: center;">
+        <a href="student.html" class="btn btn-outline" style="padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 14px;">Şagird Girişi</a>
+        <a href="parent.html" class="btn btn-outline" style="padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 14px;">Valideyn Girişi</a>
+        <a href="admin.html" class="btn btn-primary" style="padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 14px;">Müəllim Girişi</a>
+      </div>
 
     </div>
+  </header>
 
-</div>
+  </header>
+      <nav class="nav-menu">
+        <a href="#home" class="nav-link active">Ana səhifə</a>
+        <a href="#about-teacher" class="nav-link">Müəllim Haqqında</a>
+        <a href="#features" class="nav-link">Xüsusiyyətlər</a>
+        <a href="#how-it-works" class="nav-link">Necə işləyir</a>
+        <a href="#contact" class="nav-link">Əlaqə</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="admin.html" class="btn btn-secondary">Daxil ol</a>
+      </div>
+    </div>
+  </header>
 
-<div id="popup" class="popup">
-    
-</div>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge">SaaS Təhsil Platforması</div>
+        <h1 class="hero-title">EduTrack</h1>
+        <h2 class="hero-subtitle">Gülzadə Nəzərlinin Akademik İzləmə Platforması</h2>
+        <p class="hero-description">
+          Müəllim, valideyn və şagird arasında şəffaf, avtomatlaşdırılmış və rəqəmsal əlaqə yaradan müasir idarəetmə sistemi.
+        </p>
+        <div class="hero-cta">
+          <a href="admin.html" class="btn btn-primary">Platformaya Başla</a>
+          <a href="#demo" class="btn btn-outline">Demo</a>
+        </div>
+      </div>
 
-<script src="script.js"></script>
+      <!-- Live Interactive Dashboard Preview -->
+      <div class="hero-dashboard-wrapper">
+        <div class="dashboard-card">
+          <div class="dashboard-header">
+            <div>
+              <span class="dashboard-user">Administrator: Gülzadə Nəzərli</span>
+              <p class="dashboard-sub">Canlı Göstəricilər</p>
+            </div>
+            <span class="status-dot"></span>
+          </div>
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <span class="metric-label">Şagird Sayı</span>
+              <span class="metric-value">154</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Orta Nəticə</span>
+              <span class="metric-value">88.5%</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Bu Həftəki Sınaqlar</span>
+              <span class="metric-value">4</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Davamiyyət</span>
+              <span class="metric-value">96%</span>
+            </div>
+          </div>
+          <div class="notifications-widget">
+            <div class="widget-title">Son Bildirişlər</div>
+            <div class="notification-item">
+              <div class="notif-bullet"></div>
+              <div>
+                <p class="notif-text">Şagird: Aysu Əliyeva — Həftəlik sınaq nəticəsi daxil edildi (92/100).</p>
+                <span class="notif-time">10 dəqiqə əvvəl</span>
+              </div>
+            </div>
+            <div class="notification-item">
+              <div class="notif-bullet"></div>
+              <div>
+                <p class="notif-text">Valideyn hesabı tərəfindən davamiyyət təsdiqləndi.</p>
+                <span class="notif-time">35 dəqiqə əvvəl</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Statistics Section -->
+  <section class="stats-section">
+    <div class="container stats-grid">
+      <div class="stat-card">
+        <h3 class="stat-number" data-target="300">0</h3>
+        <span class="stat-plus">+</span>
+        <p class="stat-label">Keçirilmiş Sınaq</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-number" data-target="150">0</h3>
+        <span class="stat-plus">+</span>
+        <p class="stat-label">Aktiv Şagird</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-number" data-target="98">0</h3>
+        <span class="stat-percent">%</span>
+        <p class="stat-label">Valideyn Məmnuniyyəti</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Features -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">İmkanlar</span>
+        <h2 class="section-title">Platformanın Üstünlükləri</h2>
+        <p class="section-desc">Tədris prosesini idarə etmək üçün ehtiyac duyduğunuz hər şey bir yerdə.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📁</div>
+          <h3>Şagird İdarəetməsi</h3>
+          <p>Müəllim üçün şagird bazasını rahatlıqla formalaşdırmaq və idarə etmək imkanı.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">👨‍👩‍👧</div>
+          <h3>Valideyn Paneli</h3>
+          <p>Valideynlər yalnız öz övladlarının inkişaf dinamikasını və sınaqlarını izləyir.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>Şagird Paneli</h3>
+          <p>Şagirdlər öz tapşırıqlarını, gələcək imtahan tarixlərini və nəticələrini görür.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Sınaq Nəticələri</h3>
+          <p>Həftəlik və aylıq imtahan ballarının avtomatlaşdırılmış təhlili və paylaşılması.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>Davamiyyət</h3>
+          <p>Dərsdə iştirak statusunun dərhal qeyd edilməsi və valideynə bildiriş göndərilməsi.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📝</div>
+          <h3>Ev Tapşırıqları</h3>
+          <p>Tapşırıqların sistemə yerləşdirilməsi, müddətlərin təyini və şərh yazılması.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Analitika</h3>
+          <p>Şagirdin fənlər üzrə zəif və güclü tərəflərini göstərən inkişaf qrafikləri.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <h3>Anında Bildirişlər</h3>
+          <p>Yeniliklər və qiymətləndirmələr barədə avtomatik məlumatlandırma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- 👇 YENİ ƏLAVƏ EDİLƏN MÜƏLLİM HAQQINDA / CV BÖLMƏSİ 👇 -->
+  <!-- ======================================================= -->
+  <section id="about-teacher" class="features-section" style="background-color: rgba(255,255,255,0.03); padding: 60px 0;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Təsisçi & Müəllim</span>
+        <h2 class="section-title">Gülzadə Nəzərli</h2>
+        <p class="section-desc">Riyaziyyat Müəllimi & Təhsil Kontent Yaradıcısı</p>
+      </div>
+
+      <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+        
+        <!-- Profil -->
+        <div class="feature-card" style="grid-column: span 2;">
+          <div class="feature-icon">👤</div>
+          <h3>Akademik və Peşəkar Profil</h3>
+          <p style="margin-top: 10px; line-height: 1.6;">
+            Bakı Dövlət Universitetinin Riyaziyyat ixtisası üzrə təhsil almış, akademik göstəriciləri yüksək, dinamik və müasir trendlərlə ayaqlaşan riyaziyyat müəllimiyəm. BDU-da bakalavr təhsilimi uğurlu akademik nəticə və <strong>94 ballıq diplom müdafiəsi</strong> ilə tamamlamışam. 2 illik fərdi repetitorluq təcrübəmlə yanaşı, rəqəmsal dünyada da aktivəm; təhsil yönümlü sosial media kontentləri yaradaraq şagirdlərə riyaziyyat fənnini sevdirməyi və asan metodlarla aşılamağı hədəfləyirəm.
+          </p>
+        </div>
+
+        <!-- Təhsil -->
+        <div class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>Təhsil</h3>
+          <h4 style="margin-top: 5px; color: #fff;">Bakı Dövlət Universiteti (BDU)</h4>
+          <p style="font-size: 13px; color: #888;">Bakalavr, Riyaziyyat ixtisası | 2022 — 2026</p>
+          <ul style="margin-top: 10px; padding-left: 20px; font-size: 14px; line-height: 1.5;">
+            <li><strong>Diplom müdafiəsi nəticəsi:</strong> 94 bal (Yüksək nailiyyət)</li>
+            <li>Riyazi analiz, cəbr, həndəsə və riyaziyyatın tədrisi metodikası.</li>
+            <li>Pedaqoji yanaşmalar və müasir tədris metodları.</li>
+          </ul>
+        </div>
+
+        <!-- Pedaqoji Təcrübə -->
+        <div class="feature-card" style="grid-column: span 2;">
+          <div class="feature-icon">💼</div>
+          <h3>Pedaqoji və Rəqəmsal Təcrübə</h3>
+          <h4 style="margin-top: 5px; color: #fff;">Riyaziyyat Üzrə Repetitor / Təhsil Kontent Yaradıcısı</h4>
+          <p style="font-size: 13px; color: #888;">Azad Fəaliyyət | 2024 — Hazırda (2 il aktiv)</p>
+          <ul style="margin-top: 10px; padding-left: 20px; font-size: 14px; line-height: 1.6;">
+            <li><strong>5-8-ci siniflər:</strong> Riyaziyyat fənni üzrə təkmilləşdirmə dərslərinin keçirilməsi, məktəb proqramının dərindən mənimsədilməsi və BSQ/KSQ imtahanlarına hazırlıq.</li>
+            <li><strong>9, 10 və 11-ci siniflər:</strong> Dövlət İmtahan Mərkəzinin (DİM) proqramına uyğun olaraq abituriyentlərin buraxılış və blok imtahanlarına peşəkar səviyyədə hazırlanması.</li>
+            <li><strong>Rəqəmsal Maarifləndirmə:</strong> Instagram və TikTok platformalarında fəal olaraq riyazi qısa fəndlər, məsələ həlləri və şagirdlər üçün motivasiyaedici öyrədici videolar hazırlamaq bacarığı.</li>
+            <li>Dərslərin onlayn formatda interaktiv, vizual və effektiv şəkildə təşkili məqsədilə <strong>Google Meet</strong> platformasından istifadə.</li>
+          </ul>
+        </div>
+
+        <!-- Tədris Metodologiyası -->
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Tədris Metodologiyası</h3>
+          <p style="font-size: 14px; margin-top: 5px;"><strong>Sürətli Qiymətləndirmə və Keyfiyyət Mexanizmi:</strong></p>
+          <ul style="margin-top: 8px; padding-left: 20px; font-size: 13px; line-height: 1.5;">
+            <li><strong>Hər mövzu sonu:</strong> Xüsusi hazırlanmış mövzu sınaq imtahanları.</li>
+            <li><strong>Hər ay sonu:</strong> Keçilən bütün mövzuları əhatə edən ümumi monitorinq imtahanı.</li>
+            <li><strong>Ciddi Keyfiyyət Filtri:</strong> Ay sonu sınağında <strong>50 baldan aşağı</strong> nəticə göstərən şagirdlər proqramdan uzaqlaşdırılır.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="workflow-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Sistem Arxitekturası</span>
+        <h2 class="section-title">Necə İşləyir?</h2>
+      </div>
+
+      <div class="workflow-steps">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h3>Məlumatların Daxil Edilməsi</h3>
+          <p>Müəllim (Gülzadə Nəzərli) sınaq nəticələrini və davamiyyəti sistemə daxil edir.</p>
+        </div>
+        <div class="step-arrow">↓</div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h3>Avtomatik Bildiriş</h3>
+          <p>Valideyn və şagird dərhal öz şəxsi kabinetlərində yenilənmiş məlumatları görür.</p>
+        </div>
+        <div class="step-arrow">↓</div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h3>Analitik Yenilənmə</h3>
+          <p>Şagirdin akademik inkişaf qrafikləri və hesabatları avtomatik olaraq formalaşır.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">EduTrack</a>
+        <p>Gülzadə Nəzərlinin Akademik İzləmə Platforması. Bütün hüquqlar qorunur.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Naviqasiya</h4>
+        <a href="#home">Ana səhifə</a>
+        <a href="#about-teacher">Müəllim Haqqında</a>
+        <a href="#features">Xüsusiyyətlər</a>
+        <a href="#how-it-works">Necə işləyir</a>
+      </div>
+      <div class="footer-links">
+        <h4>Haqqında</h4>
+        <a href="#">Məxfilik Siyasəti</a>
+        <a href="#">İstifadə Şərtləri</a>
+        <a href="#contact">Əlaqə</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 EduTrack Platforması. SaaS İnterfeys Sistemi.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

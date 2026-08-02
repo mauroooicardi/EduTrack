@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduTrack — Şagird və Valideyn Paneli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="parent.css">
+</head>
+<body class="parent-body">
+
+  <div class="parent-wrapper">
+    <!-- Header Navigation -->
+    <header class="parent-header">
+      <div class="container header-content">
+        <a href="index.html" class="logo">
+          <span class="logo-icon"></span>
+          EduTrack
+        </a>
+        
+        <div class="student-profile-badge">
+          <div class="student-avatar">AƏ</div>
+          <div>
+            <span class="student-name">Aysu Əliyeva</span>
+            <span class="student-meta">11-ci sinif — Riyaziyyat (Müəllim: Gülzadə Nəzərli)</span>
+          </div>
+        </div>
+
+        <a href="index.html" class="btn btn-outline btn-sm">Çıxış Et</a>
+      </div>
+    </header>
+
+    <!-- Main Student Dashboard Container -->
+    <main class="container parent-main">
+      
+      <!-- Welcome Banner -->
+      <div class="welcome-banner">
+        <h2>Xoş gəldiniz, Nigar xanım (Valideyn Kabineti)</h2>
+        <p>Aysu Əliyevanın Riyaziyyat fənni üzrə davamiyyəti və həftəlik akademik göstəriciləri aşağıdadır.</p>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="parent-stats-grid">
+        <div class="p-stat-card">
+          <span class="p-stat-label">Son Sınaq Balı</span>
+          <span class="p-stat-value primary">95 / 100</span>
+          <span class="p-stat-sub">Mövzu: Törəmə və İnteqral</span>
+        </div>
+        <div class="p-stat-card">
+          <span class="p-stat-label">Orta Riyaziyyat Balı</span>
+          <span class="p-stat-value success">91.4%</span>
+          <span class="p-stat-sub">Yüksək Nəticə</span>
+        </div>
+        <div class="p-stat-card">
+          <span class="p-stat-label">Davamiyyət</span>
+          <span class="p-stat-value">98%</span>
+          <span class="p-stat-sub">1 Qayıb (İcazəli)</span>
+        </div>
+        <div class="p-stat-card">
+          <span class="p-stat-label">Gələcək Sınaq</span>
+          <span class="p-stat-value warning">08 Avqust</span>
+          <span class="p-stat-sub">Blok Sınağı #5</span>
+        </div>
+      </div>
+
+      <div class="dashboard-split">
+        <!-- Left Side: Exam Results History -->
+        <div class="split-left">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Riyaziyyat Sınaq Nəticələri Tarixçəsi</h3>
+            </div>
+            <div class="exam-list">
+              
+              <div class="exam-item">
+                <div class="exam-info">
+                  <h4>Riyaziyyat — Mövzu: Törəmə və İnteqral</h4>
+                  <span class="exam-date">01 Avqust 2026</span>
+                  <div class="teacher-note">
+                    <strong>Gülzadə Nəzərli (Müəllim qeydi):</strong> "Sual 4-də kiçik diqqətsizlik edib, ümumilikdə mövzunu mükəmməl mənimsəyib."
+                  </div>
+                </div>
+                <div class="exam-score high">95 / 100</div>
+              </div>
+
+              <div class="exam-item">
+                <div class="exam-info">
+                  <h4>Riyaziyyat — Buraxılış Sınağı #3</h4>
+                  <span class="exam-date">24 İyul 2026</span>
+                  <div class="teacher-note">
+                    <strong>Gülzadə Nəzərli (Müəllim qeydi):</strong> "Həndəsə suallarında inkişaf var. Qrafiklər üzərində işləməyə davam etməlidir."
+                  </div>
+                </div>
+                <div class="exam-score high">90 / 100</div>
+              </div>
+
+              <div class="exam-item">
+                <div class="exam-info">
+                  <h4>Riyaziyyat — Cəbr: Kompleks Ədədlər</h4>
+                  <span class="exam-date">15 İyul 2026</span>
+                  <div class="teacher-note">
+                    <strong>Gülzadə Nəzərli (Müəllim qeydi):</strong> "Nəticə çox yaxşıdır."
+                  </div>
+                </div>
+                <div class="exam-score high">89 / 100</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Attendance & Homework -->
+        <div class="split-right">
+          
+          <!-- Teacher Homework & Notes -->
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Cari Ev Tapşırığı</h3>
+            </div>
+            <div class="homework-box">
+              <span class="hw-tag">Təhvil tarixi: 05 Avqust</span>
+              <h4>İnteqral Mövzusu üzrə 30 Məsələ</h4>
+              <p>Dərslikdən səhifə 142-145 arasındakı testlər həll olunmalı və sınaq dəftərinə qeyd edilməlidir.</p>
+            </div>
+          </div>
+
+          <!-- Attendance History -->
+          <div class="content-card margin-top">
+            <div class="card-header">
+              <h3>Son Davamiyyət Statusu</h3>
+            </div>
+            <ul class="attendance-list">
+              <li class="att-item present">
+                <span>01 Avqust 2026 (Şənbə)</span>
+                <span class="att-status">İştirak Edib</span>
+              </li>
+              <li class="att-item present">
+                <span>29 İyul 2026 (Çərşənbə)</span>
+                <span class="att-status">İştirak Edib</span>
+              </li>
+              <li class="att-item absent">
+                <span>25 İyul 2026 (Şənbə)</span>
+                <span class="att-status">Qayıb (Xəstəlik)</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>

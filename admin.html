@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Müəllim Paneli — EduTrack</title>
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: #fff8f9; color: #1e293b; margin: 0; font-family: 'Inter', sans-serif;">
+
+  <!-- 1. GİRİŞ ŞİFRƏ PƏNCƏRƏSİ -->
+  <div id="loginSection" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;">
+    <div style="background: #ffffff; border-radius: 16px; padding: 40px; border: 1px solid #fce7f3; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(236, 72, 153, 0.1); text-align: center;">
+      
+      <div style="margin-bottom: 25px;">
+        <div style="width: 50px; height: 50px; background: #fbcfe8; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto;">
+          <span style="font-size: 24px;">🔒</span>
+        </div>
+        <h2 style="margin: 0; font-size: 22px; color: #1e293b;">Müəllim Girişi</h2>
+        <p style="margin: 5px 0 0 0; color: #64748b; font-size: 13px;">Gülzadə Nəzərli — İdarəetmə Paneli</p>
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div style="margin-bottom: 20px; text-align: left;">
+          <label for="adminPassword" style="display: block; color: #475569; font-size: 13px; margin-bottom: 8px;">Giriş Kodu / PİN Kod:</label>
+          <input type="password" id="adminPassword" placeholder="Kod adını daxil edin..." required style="width: 100%; padding: 12px 14px; border-radius: 8px; background: #fff5f7; border: 1px solid #fbcfe8; color: #1e293b; font-size: 14px; box-sizing: border-box; outline: none;">
+        </div>
+
+        <div id="errorMessage" style="display: none; color: #ef4444; background: #fee2e2; padding: 10px; border-radius: 6px; font-size: 12px; margin-bottom: 15px; border: 1px solid #fca5a5;">
+          ❌ Kod yanlışdır! Yenidən cəhd edin.
+        </div>
+
+        <button type="submit" style="width: 100%; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #ec4899; color: #fff; border: none; box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);">
+          Sistemə Daxil Ol
+        </button>
+      </form>
+
+      <div style="margin-top: 20px;">
+        <a href="index.html" style="color: #64748b; font-size: 12px; text-decoration: none;">← Ana Səhifəyə Qayıt</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 2. MÜƏLLİM İDARƏETMƏ PANELSİ -->
+  <div id="dashboardSection" style="display: none; padding-top: 80px;">
+    
+    <!-- Top Navbar -->
+    <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 1px solid #fce7f3; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto;">
+        <a href="index.html" style="color: #1e293b; font-weight: bold; text-decoration: none; font-size: 20px;">
+          EduTrack <span style="font-size: 12px; color: #ec4899; font-weight: normal;">| Müəllim Paneli</span>
+        </a>
+        <div>
+          <span style="color: #475569; font-size: 14px; margin-right: 15px;">Xoş gəldiniz, <strong>Gülzadə Müəllim</strong></span>
+          <button onclick="logout()" style="padding: 6px 16px; border: 1px solid #ec4899; color: #ec4899; background: transparent; border-radius: 6px; cursor: pointer; font-weight: 500;">Çıxış Et</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+      
+      <!-- Top Title Box -->
+      <div style="background: #ffffff; border-radius: 12px; padding: 24px; margin-bottom: 25px; border: 1px solid #fce7f3; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.05);">
+        <h2 style="margin: 0 0 10px 0; font-size: 22px; color: #1e293b;">Şagirdlərin Qiymətləndirilməsi və Monitorinq</h2>
+        <p style="color: #64748b; font-size: 14px; margin: 0;">Sınaq ballarını daxil edin. (50 ballıq filtir sistem tərəfindən avtomatik yoxlanılır)</p>
+      </div>
+
+      <!-- Form -->
+      <div style="background: #ffffff; border-radius: 12px; padding: 20px; border: 1px solid #fce7f3; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.05);">
+        <h3 style="margin-top: 0; font-size: 16px; color: #ec4899;">➕ Yeni Sınaq Balı Daxil Et</h3>
+        <form onsubmit="addStudentScore(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px;">
+          <input type="text" id="studentName" placeholder="Şagirdin Adı Soyadı" required style="padding: 10px 14px; border-radius: 6px; background: #fff5f7; border: 1px solid #fbcfe8; color: #1e293b; outline: none;">
+          <select id="studentClassSelect" style="padding: 10px 14px; border-radius: 6px; background: #fff5f7; border: 1px solid #fbcfe8; color: #1e293b; outline: none; cursor: pointer;">
+            <option>6-cı Sinif</option>
+            <option>7-ci Sinif</option>
+            <option>8-ci Sinif</option>
+            <option>9-cu Sinif (DİM)</option>
+            <option>10-cu Sinif (DİM)</option>
+            <option>11-ci Sinif (DİM)</option>
+          </select>
+          <input type="number" id="studentScore" placeholder="Bal (0 - 100)" min="0" max="100" required style="padding: 10px 14px; border-radius: 6px; background: #fff5f7; border: 1px solid #fbcfe8; color: #1e293b; outline: none;">
+          <button type="submit" style="padding: 10px; background: #ec4899; color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Yadda Saqla</button>
+        </form>
+      </div>
+
+      <!-- CƏDVƏL -->
+      <div style="background: #ffffff; border-radius: 12px; padding: 20px; border: 1px solid #fce7f3; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.05);">
+        <h3 style="margin-top: 0; font-size: 16px; color: #1e293b; margin-bottom: 15px;">📋 Daxil Edilmiş Şagird Nəticələri</h3>
+        
+        <table style="width: 100%; text-align: left; border-collapse: collapse; color: #475569; font-size: 14px;">
+          <thead>
+            <tr style="border-bottom: 2px solid #fce7f3; color: #1e293b;">
+              <th style="padding: 10px;">Şagird Adı</th>
+              <th>Sinif</th>
+              <th>Sınaq Balı</th>
+              <th>Keyfiyyət Filtri Statusu (50 Bal)</th>
+              <th>Əməliyyat</th>
+            </tr>
+          </thead>
+          <tbody id="studentTableBody">
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+
+
+  <!-- JavaScript -->
+  <script>
+    let students = [
+      { name: "Aysu Əliyeva", class: "11-ci Sinif (DİM)", score: 84 },
+      { name: "Murad Məmmədov", class: "9-cu Sinif (DİM)", score: 45 },
+      { name: "Leyla Həsənova", class: "7-ci Sinif", score: 92 }
+    ];
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const CORRECT_PASSWORD = "tetiklenmek1234";
+      const inputPassword = document.getElementById('adminPassword').value;
+      const errorMessage = document.getElementById('errorMessage');
+
+      if (inputPassword.trim() === CORRECT_PASSWORD) {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('dashboardSection').style.display = 'block';
+        renderTable();
+      } else {
+        errorMessage.style.display = 'block';
+      }
+    }
+
+    function logout() {
+      document.getElementById('loginSection').style.display = 'flex';
+      document.getElementById('dashboardSection').style.display = 'none';
+      document.getElementById('adminPassword').value = '';
+      document.getElementById('errorMessage').style.display = 'none';
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('studentTableBody');
+      tbody.innerHTML = '';
+
+      students.forEach((student, index) => {
+        const isPassed = student.score >= 50;
+        const statusBadge = isPassed 
+          ? `<span style="background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold;">✅ Keçdi (>50)</span>`
+          : `<span style="background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold;">⚠️ Risk (<50 Limit)</span>`;
+
+        const row = `
+          <tr style="border-bottom: 1px solid #fce7f3;">
+            <td style="padding: 12px 10px; color: #1e293b; font-weight: 500;">${student.name}</td>
+            <td>${student.class}</td>
+            <td style="font-weight: bold; color: ${isPassed ? '#166534' : '#ef4444'};">${student.score} Bal</td>
+            <td>${statusBadge}</td>
+            <td><button onclick="deleteStudent(${index})" style="background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 13px;">Sil</button></td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    }
+
+    function addStudentScore(event) {
+      event.preventDefault();
+      const name = document.getElementById('studentName').value;
+      const studentClass = document.getElementById('studentClassSelect').value;
+      const score = parseInt(document.getElementById('studentScore').value);
+
+      students.unshift({ name, class: studentClass, score });
+      renderTable();
+
+      document.getElementById('studentName').value = '';
+      document.getElementById('studentScore').value = '';
+      alert("Şagird balı uğurla daxil edildi!");
+    }
+
+    function deleteStudent(index) {
+      if(confirm("Bu məlumatı silmək istədiyinizdən əminsiniz?")) {
+        students.splice(index, 1);
+        renderTable();
+      }
+    }
+  </script>
+
+</body>
+</html>
