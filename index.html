@@ -1,149 +1,350 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="az">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduTrack — Gülzadə Nəzərlinin Akademik İzləmə Platforması</title>
-  <!-- Google Fonts Inter -->
+  <title>Gülzadə Nəzərli ilə Riyaziyyat — Tədris Portalı</title>
+  
+  <!-- Google Fonts Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    body { background-color: #fff8f9; color: #1e293b; overflow-x: hidden; position: relative; }
+
+    /* 🌟 CANLI VƏ GÖZƏ ÇARPAN ANIMASIYALAR */
+    @keyframes floatMath {
+      0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.15; }
+      50% { transform: translateY(-35px) rotate(25deg) scale(1.2); opacity: 0.35; color: #ec4899; }
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 10px 30px rgba(236, 72, 153, 0.25); }
+      50% { box-shadow: 0 20px 50px rgba(236, 72, 153, 0.5); }
+      100% { box-shadow: 0 10px 30px rgba(236, 72, 153, 0.25); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes cardPop {
+      from { opacity: 0; transform: translateY(30px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ARXA FON RİYAZİ SİMVOLLARI */
+    .math-bg-symbol {
+      position: absolute;
+      color: rgba(236, 72, 153, 0.2);
+      font-weight: 800;
+      user-select: none;
+      pointer-events: none;
+      animation: floatMath 8s infinite ease-in-out;
+      z-index: 0;
+      text-shadow: 0 0 12px rgba(236, 72, 153, 0.2);
+    }
+
+    /* EYLER SU İŞARƏSİ PORTRETİ */
+    .euler-watermark {
+      position: absolute;
+      right: 2%;
+      top: 60px;
+      width: 440px;
+      height: auto;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: multiply;
+      filter: contrast(130%) grayscale(30%);
+      transition: all 0.5s ease;
+      animation: floatMath 12s infinite ease-in-out;
+    }
+
+    /* CONTAINER & NAVBAR */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+    
+    header.navbar {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #fce7f3;
+      padding: 16px 0;
+      box-shadow: 0 4px 25px rgba(236, 72, 153, 0.05);
+    }
+
+    .navbar-container { display: flex; justify-content: space-between; align-items: center; }
+    
+    .logo { 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+      font-weight: 800; 
+      font-size: 20px; 
+      color: #1e293b; 
+      text-decoration: none; 
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .logo span.brand-name {
+      background: linear-gradient(135deg, #ec4899, #8b5cf6, #ec4899);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 4s ease infinite;
+    }
+    .badge-math { background: #fce7f3; color: #ec4899; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 14px; }
+
+    .nav-menu { display: flex; gap: 28px; }
+    .nav-link { text-decoration: none; color: #64748b; font-size: 14px; font-weight: 600; transition: 0.3s; }
+    .nav-link:hover, .nav-link.active { color: #ec4899; transform: translateY(-1px); }
+
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+    
+    .btn { display: inline-block; text-decoration: none; font-weight: 700; font-size: 14px; border-radius: 12px; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; }
+    .btn-outline { border: 1.5px solid #fbcfe8; background: #fff; color: #ec4899; padding: 10px 20px; }
+    .btn-outline:hover { background: #fdf2f8; transform: translateY(-3deg) scale(1.03); box-shadow: 0 6px 20px rgba(236, 72, 153, 0.18); }
+    .btn-primary { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; border: none; padding: 11px 24px; box-shadow: 0 6px 20px rgba(236, 72, 153, 0.35); }
+    .btn-primary:hover { transform: translateY(-3deg) scale(1.04); box-shadow: 0 10px 28px rgba(236, 72, 153, 0.5); }
+
+    /* HERO SECTION */
+    .hero { padding: 80px 0 60px 0; position: relative; z-index: 2; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+    
+    .hero-title { font-size: 46px; font-weight: 800; color: #0f172a; line-height: 1.18; margin-bottom: 16px; letter-spacing: -0.5px; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .hero-title span { 
+      background: linear-gradient(135deg, #ec4899, #d946ef);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle { font-size: 18px; font-weight: 700; color: #475569; margin-bottom: 14px; }
+    .hero-description { font-size: 15px; color: #64748b; line-height: 1.7; margin-bottom: 35px; max-width: 520px; }
+
+    /* HERO GAUSS PHOTO CARD WITH GLOW & FLOATING WIDGET */
+    .hero-dashboard-wrapper { position: relative; display: flex; justify-content: center; }
+    .gauss-photo-card {
+      background: linear-gradient(135deg, #ffffff, #fce7f3);
+      border-radius: 32px;
+      padding: 12px;
+      border: 3px solid #fbcfe8;
+      position: relative;
+      overflow: hidden;
+      animation: pulseGlow 4s infinite alternate;
+      transition: transform 0.4s ease;
+      max-width: 420px;
+    }
+    .gauss-photo-card:hover { transform: scale(1.03) rotate(-1deg); }
+    .gauss-photo-card img { 
+      width: 100%; 
+      height: 480px; 
+      object-fit: cover; 
+      object-position: center top; 
+      border-radius: 24px; 
+      display: block; 
+      filter: contrast(105%) brightness(98%);
+    }
+
+    .floating-card {
+      position: absolute;
+      bottom: -20px;
+      left: -15px;
+      background: #ffffff;
+      padding: 16px 22px;
+      border-radius: 20px;
+      border: 1px solid #fce7f3;
+      box-shadow: 0 15px 35px rgba(236, 72, 153, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      animation: floatMath 6s infinite ease-in-out;
+      z-index: 10;
+    }
+
+    /* STATS BAR */
+    .stats-section { margin: 40px 0 60px 0; }
+    .stats-bar {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 35px 40px;
+      border: 1px solid #fce7f3;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(236, 72, 153, 0.06);
+      animation: cardPop 0.8s ease-out;
+    }
+
+    .stat-card h3 { font-size: 38px; font-weight: 800; color: #ec4899; margin-bottom: 4px; display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .stat-card p { font-size: 13px; font-weight: 600; color: #64748b; }
+
+    /* FEATURES & CARDS */
+    .features-section { padding: 60px 0; }
+    .section-header { text-align: center; margin-bottom: 45px; }
+    .section-tag { color: #ec4899; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; }
+    .section-title { font-size: 32px; font-weight: 800; color: #1e293b; margin-top: 6px; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .section-desc { color: #64748b; font-size: 14px; margin-top: 8px; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .feature-card {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 22px;
+      border: 1px solid #fce7f3;
+      box-shadow: 0 6px 20px rgba(236, 72, 153, 0.04);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .feature-card:hover { transform: translateY(-8px) scale(1.02); border-color: #fbcfe8; box-shadow: 0 15px 35px rgba(236, 72, 153, 0.15); }
+    .feature-icon { font-size: 36px; margin-bottom: 16px; }
+    .feature-card h3 { font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+    .feature-card p { font-size: 13px; color: #64748b; line-height: 1.6; }
+
+    /* WORKFLOW SECTION */
+    .workflow-section { padding: 80px 0; background: #fff8f9; }
+    .workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 30px; }
+    
+    .workflow-card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 40px 30px;
+      border: 1px solid #fce7f3;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.04);
+      transition: all 0.4s ease;
+    }
+    .workflow-card:hover { transform: translateY(-10px); border-color: #fbcfe8; box-shadow: 0 18px 40px rgba(236, 72, 153, 0.15); }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 8px 20px rgba(236, 72, 153, 0.35);
+    }
+
+    /* MODAL POPUP */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
+    .modal-card { background: #ffffff; width: 100%; max-width: 440px; border-radius: 26px; padding: 36px; border: 1px solid #fce7f3; box-shadow: 0 25px 60px rgba(236,72,153,0.2); position: relative; text-align: center; animation: cardPop 0.3s ease-out; }
+    .close-btn { position: absolute; top: 16px; right: 22px; background: none; border: none; font-size: 26px; cursor: pointer; color: #94a3b8; font-weight: bold; }
+    
+    .modal-tabs { display: flex; background: #fff5f7; padding: 5px; border-radius: 14px; border: 1px solid #fbcfe8; margin: 22px 0; }
+    .tab-b { flex: 1; padding: 11px; border: none; background: transparent; border-radius: 10px; font-weight: 700; font-size: 13px; color: #64748b; cursor: pointer; transition: 0.3s; }
+    .tab-b.active { background: #fff; color: #ec4899; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+
+    .modal-input { width: 100%; padding: 14px; border-radius: 12px; background: #fff5f7; border: 1.5px solid #fbcfe8; outline: none; font-size: 15px; font-weight: 600; text-align: center; margin-bottom: 18px; text-transform: uppercase; transition: 0.3s; }
+    .modal-input:focus { border-color: #ec4899; background: #fff; box-shadow: 0 0 0 4px rgba(236,72,153,0.15); }
+    .result-view { display: none; margin-top: 20px; text-align: left; background: #fff5f7; padding: 16px; border-radius: 14px; border: 1px solid #fbcfe8; }
+
+    /* FOOTER */
+    footer { background: #ffffff; border-top: 1px solid #fce7f3; padding: 40px 0; text-align: center; font-size: 13px; color: #64748b; }
+    footer strong { color: #1e293b; display: block; font-size: 16px; margin-bottom: 6px; }
+  </style>
 </head>
 
 <body>
 
-  <!-- Premium Navbar -->
+  <!-- ARXA FON RİYAZİ SİMVOLLARI VƏ LEYONHARD EYLER İLLÜSTRASİYASI -->
+  <div class="math-bg-symbol" style="top: 10%; left: 3%; font-size: 42px;">&pi;</div>
+  <div class="math-bg-symbol" style="top: 22%; left: 42%; font-size: 48px; animation-delay: 2s;">&sum;</div>
+  <div class="math-bg-symbol" style="top: 55%; left: 6%; font-size: 40px; animation-delay: 4s;">&int;</div>
+  <div class="math-bg-symbol" style="top: 70%; left: 90%; font-size: 44px; animation-delay: 1s;">&infin;</div>
+  <div class="math-bg-symbol" style="top: 15%; left: 78%; font-size: 38px; animation-delay: 3s;">&sqrt;x</div>
+  <div class="math-bg-symbol" style="top: 82%; left: 45%; font-size: 34px; animation-delay: 5s;">e<sup>i&pi;</sup></div>
+  <div class="math-bg-symbol" style="top: 40%; left: 12%; font-size: 36px; animation-delay: 2.5s;">f(x)</div>
+
+  <!-- EYLER SU İŞARƏSİ PORTRETİ -->
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Leonhard_Euler_2.jpg" class="euler-watermark" alt="Leonhard Euler Portrait">
+
+  <!-- NAVBAR -->
   <header class="navbar">
-    <div class="container navbar-container" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
-      
-      <!-- LOGO -->
-      <a href="#" class="logo" style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 20px; text-decoration: none;">
-        <span class="logo-icon" style="width: 12px; height: 12px; border-radius: 3px; display: inline-block;"></span>
-        EduTrack
+    <div class="container navbar-container">
+      <a href="#" class="logo">
+        📐 <span class="brand-name">Gülzadə Nəzərli ilə Riyaziyyat</span>
+        <span class="badge-math">MATH</span>
       </a>
 
-      <!-- NAV MENYU -->
-      <nav class="nav-menu" style="display: flex; gap: 20px;">
-        <a href="#home" class="nav-link active" style="text-decoration: none;">Ana səhifə</a>
-        <a href="#about-teacher" class="nav-link" style="text-decoration: none;">Müəllim Haqqında</a>
-        <a href="#features" class="nav-link" style="text-decoration: none;">Xüsusiyyətlər</a>
-        <a href="#how-it-works" class="nav-link" style="text-decoration: none;">Necə işləyir</a>
-      </nav>
-
-      <!-- DÜYMƏLƏR -->
-      <div class="nav-actions" style="display: flex; gap: 10px; align-items: center;">
-        <a href="student.html" class="btn btn-outline" style="padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 14px;">Şagird Girişi</a>
-        <a href="parent.html" class="btn btn-outline" style="padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 14px;">Valideyn Girişi</a>
-        <a href="admin.html" class="btn btn-primary" style="padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 14px;">Müəllim Girişi</a>
-      </div>
-
-    </div>
-  </header>
-
-  </header>
       <nav class="nav-menu">
         <a href="#home" class="nav-link active">Ana səhifə</a>
         <a href="#about-teacher" class="nav-link">Müəllim Haqqında</a>
         <a href="#features" class="nav-link">Xüsusiyyətlər</a>
         <a href="#how-it-works" class="nav-link">Necə işləyir</a>
-        <a href="#contact" class="nav-link">Əlaqə</a>
       </nav>
+
       <div class="nav-actions">
-        <a href="admin.html" class="btn btn-secondary">Daxil ol</a>
+        <button class="btn btn-outline" onclick="openLoginModal('student')">Şagird Girişi</button>
+        <button class="btn btn-outline" onclick="openLoginModal('parent')">Valideyn Girişi</button>
+        <a href="admin.html" class="btn btn-primary">Müəllim Girişi</a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- HERO SECTION -->
   <section id="home" class="hero">
     <div class="container hero-grid">
       <div class="hero-content">
-        <div class="badge">SaaS Təhsil Platforması</div>
-        <h1 class="hero-title">EduTrack</h1>
-        <h2 class="hero-subtitle">Gülzadə Nəzərlinin Akademik İzləmə Platforması</h2>
+        <h1 class="hero-title">Gülzadə Nəzərli ilə<br><span>Riyaziyyatda Yüksək Bal</span> Bərabərdir!</h1>
+        <h2 class="hero-subtitle">Akademik Nəticələrin Rəqəmsal İzləmə Portalı</h2>
         <p class="hero-description">
-          Müəllim, valideyn və şagird arasında şəffaf, avtomatlaşdırılmış və rəqəmsal əlaqə yaradan müasir idarəetmə sistemi.
+          Müəllim, valideyn və şagird arasında şəffaf, avtomatlaşdırılmış və rəqəmsal əlaqə yaradan müasir riyaziyyat idarəetmə sistemi.
         </p>
         <div class="hero-cta">
-          <a href="admin.html" class="btn btn-primary">Platformaya Başla</a>
-          <a href="#demo" class="btn btn-outline">Demo</a>
+          <button class="btn btn-primary" style="padding: 14px 32px; font-size: 15px;" onclick="openLoginModal('student')">Sınaq Nəticələrimə Bax 🚀</button>
         </div>
       </div>
 
-      <!-- Live Interactive Dashboard Preview -->
+      <!-- RIGHT GAUSS PHOTO CARD WITH GLOW & FLOATING WIDGET -->
       <div class="hero-dashboard-wrapper">
-        <div class="dashboard-card">
-          <div class="dashboard-header">
-            <div>
-              <span class="dashboard-user">Administrator: Gülzadə Nəzərli</span>
-              <p class="dashboard-sub">Canlı Göstəricilər</p>
-            </div>
-            <span class="status-dot"></span>
-          </div>
-          <div class="metrics-grid">
-            <div class="metric-item">
-              <span class="metric-label">Şagird Sayı</span>
-              <span class="metric-value">154</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-label">Orta Nəticə</span>
-              <span class="metric-value">88.5%</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-label">Bu Həftəki Sınaqlar</span>
-              <span class="metric-value">4</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-label">Davamiyyət</span>
-              <span class="metric-value">96%</span>
-            </div>
-          </div>
-          <div class="notifications-widget">
-            <div class="widget-title">Son Bildirişlər</div>
-            <div class="notification-item">
-              <div class="notif-bullet"></div>
-              <div>
-                <p class="notif-text">Şagird: Aysu Əliyeva — Həftəlik sınaq nəticəsi daxil edildi (92/100).</p>
-                <span class="notif-time">10 dəqiqə əvvəl</span>
-              </div>
-            </div>
-            <div class="notification-item">
-              <div class="notif-bullet"></div>
-              <div>
-                <p class="notif-text">Valideyn hesabı tərəfindən davamiyyət təsdiqləndi.</p>
-                <span class="notif-time">35 dəqiqə əvvəl</span>
-              </div>
-            </div>
+        <div class="gauss-photo-card">
+          <!-- CARL FRIEDRICH GAUSS PORTRETİ -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Carl_Friedrich_Gauss_1840_by_Jensen.jpg" alt="Carl Friedrich Gauss">
+        </div>
+        <div class="floating-card">
+          <div style="font-size: 28px;">👑</div>
+          <div>
+            <strong style="display:block; font-size:13px; color:#ec4899;">Karl Fridrix Qaus</strong>
+            <span style="font-size:11px; color:#64748b;">"Riyaziyyat Elmlərin Şahıdır"</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Statistics Section -->
+  <!-- STATISTICS BAR -->
   <section class="stats-section">
-    <div class="container stats-grid">
-      <div class="stat-card">
-        <h3 class="stat-number" data-target="300">0</h3>
-        <span class="stat-plus">+</span>
-        <p class="stat-label">Keçirilmiş Sınaq</p>
-      </div>
-      <div class="stat-card">
-        <h3 class="stat-number" data-target="150">0</h3>
-        <span class="stat-plus">+</span>
-        <p class="stat-label">Aktiv Şagird</p>
-      </div>
-      <div class="stat-card">
-        <h3 class="stat-number" data-target="98">0</h3>
-        <span class="stat-percent">%</span>
-        <p class="stat-label">Valideyn Məmnuniyyəti</p>
+    <div class="container">
+      <div class="stats-bar">
+        <div class="stat-card">
+          <h3>300+</h3>
+          <p>Aktiv Şagird</p>
+        </div>
+        <div class="stat-card">
+          <h3>150+</h3>
+          <p>Sınaq İmtahanı</p>
+        </div>
+        <div class="stat-card">
+          <h3>94 Bal</h3>
+          <p>Ortalama DİM Nəticəsi</p>
+        </div>
+        <div class="stat-card">
+          <h3>98%</h3>
+          <p>Valideyn Məmnuniyyəti</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Platform Features -->
+  <!-- FEATURES SECTION -->
   <section id="features" class="features-section">
     <div class="container">
       <div class="section-header">
@@ -173,34 +374,12 @@
           <h3>Sınaq Nəticələri</h3>
           <p>Həftəlik və aylıq imtahan ballarının avtomatlaşdırılmış təhlili və paylaşılması.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📅</div>
-          <h3>Davamiyyət</h3>
-          <p>Dərsdə iştirak statusunun dərhal qeyd edilməsi və valideynə bildiriş göndərilməsi.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📝</div>
-          <h3>Ev Tapşırıqları</h3>
-          <p>Tapşırıqların sistemə yerləşdirilməsi, müddətlərin təyini və şərh yazılması.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📈</div>
-          <h3>Analitika</h3>
-          <p>Şagirdin fənlər üzrə zəif və güclü tərəflərini göstərən inkişaf qrafikləri.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔔</div>
-          <h3>Anında Bildirişlər</h3>
-          <p>Yeniliklər və qiymətləndirmələr barədə avtomatik məlumatlandırma.</p>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ======================================================= -->
-  <!-- 👇 YENİ ƏLAVƏ EDİLƏN MÜƏLLİM HAQQINDA / CV BÖLMƏSİ 👇 -->
-  <!-- ======================================================= -->
-  <section id="about-teacher" class="features-section" style="background-color: rgba(255,255,255,0.03); padding: 60px 0;">
+  <!-- MÜƏLLİM HAQQINDA / CV BÖLMƏSİ -->
+  <section id="about-teacher" class="features-section" style="background: rgba(255,255,255,0.7); border-top: 1px solid #fce7f3; border-bottom: 1px solid #fce7f3;">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">Təsisçi & Müəllim</span>
@@ -208,116 +387,171 @@
         <p class="section-desc">Riyaziyyat Müəllimi & Təhsil Kontent Yaradıcısı</p>
       </div>
 
-      <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-        
-        <!-- Profil -->
+      <div class="features-grid">
         <div class="feature-card" style="grid-column: span 2;">
           <div class="feature-icon">👤</div>
           <h3>Akademik və Peşəkar Profil</h3>
-          <p style="margin-top: 10px; line-height: 1.6;">
-            Bakı Dövlət Universitetinin Riyaziyyat ixtisası üzrə təhsil almış, akademik göstəriciləri yüksək, dinamik və müasir trendlərlə ayaqlaşan riyaziyyat müəllimiyəm. BDU-da bakalavr təhsilimi uğurlu akademik nəticə və <strong>94 ballıq diplom müdafiəsi</strong> ilə tamamlamışam. 2 illik fərdi repetitorluq təcrübəmlə yanaşı, rəqəmsal dünyada da aktivəm; təhsil yönümlü sosial media kontentləri yaradaraq şagirdlərə riyaziyyat fənnini sevdirməyi və asan metodlarla aşılamağı hədəfləyirəm.
-          </p>
+          <p>Bakı Dövlət Universitetinin Riyaziyyat ixtisası üzrə təhsil almış, akademik göstəriciləri yüksək, dinamik və müasir trendlərlə ayaqlaşan riyaziyyat müəllimiyəm. BDU-da bakalavr təhsilimi uğurlu akademik nəticə və <strong>94 ballıq diplom müdafiəsi</strong> ilə tamamlamışam. Fərdi repetitorluq təcrübəmlə yanaşı, rəqəmsal dünyada da aktivəm.</p>
         </div>
 
-        <!-- Təhsil -->
         <div class="feature-card">
           <div class="feature-icon">🎓</div>
           <h3>Təhsil</h3>
-          <h4 style="margin-top: 5px; color: #fff;">Bakı Dövlət Universiteti (BDU)</h4>
-          <p style="font-size: 13px; color: #888;">Bakalavr, Riyaziyyat ixtisası | 2022 — 2026</p>
-          <ul style="margin-top: 10px; padding-left: 20px; font-size: 14px; line-height: 1.5;">
-            <li><strong>Diplom müdafiəsi nəticəsi:</strong> 94 bal (Yüksək nailiyyət)</li>
-            <li>Riyazi analiz, cəbr, həndəsə və riyaziyyatın tədrisi metodikası.</li>
-            <li>Pedaqoji yanaşmalar və müasir tədris metodları.</li>
-          </ul>
+          <h4 style="color:#1e293b; margin-top:4px;">Bakı Dövlət Universiteti (BDU)</h4>
+          <p style="font-size:12px; color:#ec4899; font-weight:600; margin-bottom:8px;">Bakalavr, Riyaziyyat | 2022 — 2026</p>
+          <p style="font-size:13px;">Diplom müdafiəsi nəticəsi: <strong>94 bal (Yüksək nailiyyət)</strong></p>
         </div>
-
-        <!-- Pedaqoji Təcrübə -->
-        <div class="feature-card" style="grid-column: span 2;">
-          <div class="feature-icon">💼</div>
-          <h3>Pedaqoji və Rəqəmsal Təcrübə</h3>
-          <h4 style="margin-top: 5px; color: #fff;">Riyaziyyat Üzrə Repetitor / Təhsil Kontent Yaradıcısı</h4>
-          <p style="font-size: 13px; color: #888;">Azad Fəaliyyət | 2024 — Hazırda (2 il aktiv)</p>
-          <ul style="margin-top: 10px; padding-left: 20px; font-size: 14px; line-height: 1.6;">
-            <li><strong>5-8-ci siniflər:</strong> Riyaziyyat fənni üzrə təkmilləşdirmə dərslərinin keçirilməsi, məktəb proqramının dərindən mənimsədilməsi və BSQ/KSQ imtahanlarına hazırlıq.</li>
-            <li><strong>9, 10 və 11-ci siniflər:</strong> Dövlət İmtahan Mərkəzinin (DİM) proqramına uyğun olaraq abituriyentlərin buraxılış və blok imtahanlarına peşəkar səviyyədə hazırlanması.</li>
-            <li><strong>Rəqəmsal Maarifləndirmə:</strong> Instagram və TikTok platformalarında fəal olaraq riyazi qısa fəndlər, məsələ həlləri və şagirdlər üçün motivasiyaedici öyrədici videolar hazırlamaq bacarığı.</li>
-            <li>Dərslərin onlayn formatda interaktiv, vizual və effektiv şəkildə təşkili məqsədilə <strong>Google Meet</strong> platformasından istifadə.</li>
-          </ul>
-        </div>
-
-        <!-- Tədris Metodologiyası -->
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Tədris Metodologiyası</h3>
-          <p style="font-size: 14px; margin-top: 5px;"><strong>Sürətli Qiymətləndirmə və Keyfiyyət Mexanizmi:</strong></p>
-          <ul style="margin-top: 8px; padding-left: 20px; font-size: 13px; line-height: 1.5;">
-            <li><strong>Hər mövzu sonu:</strong> Xüsusi hazırlanmış mövzu sınaq imtahanları.</li>
-            <li><strong>Hər ay sonu:</strong> Keçilən bütün mövzuları əhatə edən ümumi monitorinq imtahanı.</li>
-            <li><strong>Ciddi Keyfiyyət Filtri:</strong> Ay sonu sınağında <strong>50 baldan aşağı</strong> nəticə göstərən şagirdlər proqramdan uzaqlaşdırılır.</li>
-          </ul>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
+  <!-- NECƏ İŞLƏYİR? -->
   <section id="how-it-works" class="workflow-section">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Sistem Arxitekturası</span>
+        <span class="section-tag">SİSTEM ARXİTEKTURASI</span>
         <h2 class="section-title">Necə İşləyir?</h2>
       </div>
 
-      <div class="workflow-steps">
-        <div class="step-card">
-          <div class="step-num">01</div>
+      <div class="workflow-grid">
+        <div class="workflow-card">
+          <div class="step-number">01</div>
           <h3>Məlumatların Daxil Edilməsi</h3>
-          <p>Müəllim (Gülzadə Nəzərli) sınaq nəticələrini və davamiyyəti sistemə daxil edir.</p>
+          <p>Gülzadə Nəzərli sınaq nəticələrini və davamiyyəti sistemə daxil edir.</p>
         </div>
-        <div class="step-arrow">↓</div>
-        <div class="step-card">
-          <div class="step-num">02</div>
+
+        <div class="workflow-card">
+          <div class="step-number">02</div>
           <h3>Avtomatik Bildiriş</h3>
-          <p>Valideyn və şagird dərhal öz şəxsi kabinetlərində yenilənmiş məlumatları görür.</p>
+          <p>Valideyn və şagird dərhal öz kabinetlərində balı görür.</p>
         </div>
-        <div class="step-arrow">↓</div>
-        <div class="step-card">
-          <div class="step-num">03</div>
+
+        <div class="workflow-card">
+          <div class="step-number">03</div>
           <h3>Analitik Yenilənmə</h3>
-          <p>Şagirdin akademik inkişaf qrafikləri və hesabatları avtomatik olaraq formalaşır.</p>
+          <p>Şagirdin akademik inkişaf qrafikləri avtomatik formalaşır.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="logo">EduTrack</a>
-        <p>Gülzadə Nəzərlinin Akademik İzləmə Platforması. Bütün hüquqlar qorunur.</p>
+  <!-- KODLA GİRİŞ MODAL PƏNCƏRƏSİ -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-card">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <h2 style="font-size: 20px; color: #1e293b; font-weight:800;">Nəticə Portalı</h2>
+      <p style="font-size: 13px; color: #64748b; margin-top: 4px;">Balınızı görmək üçün PİN kodu daxil edin</p>
+
+      <div class="modal-tabs">
+        <button class="tab-b active" id="tabSt" onclick="setRole('student')">👨‍🎓 Şagird</button>
+        <button class="tab-b" id="tabPr" onclick="setRole('parent')">👨‍👩‍👦 Valideyn</button>
       </div>
-      <div class="footer-links">
-        <h4>Naviqasiya</h4>
-        <a href="#home">Ana səhifə</a>
-        <a href="#about-teacher">Müəllim Haqqında</a>
-        <a href="#features">Xüsusiyyətlər</a>
-        <a href="#how-it-works">Necə işləyir</a>
-      </div>
-      <div class="footer-links">
-        <h4>Haqqında</h4>
-        <a href="#">Məxfilik Siyasəti</a>
-        <a href="#">İstifadə Şərtləri</a>
-        <a href="#contact">Əlaqə</a>
+
+      <input type="text" id="modalCode" class="modal-input" placeholder="Şagird Kodu (Məs: G1234)" autocomplete="off">
+      <button class="btn btn-primary" style="width: 100%; padding: 14px;" onclick="fetchResults()">Daxil Ol</button>
+
+      <!-- NƏTİCƏLƏR -->
+      <div class="result-view" id="resultView">
+        <h3 id="resName" style="font-size: 16px; color: #1e293b; font-weight:800;"></h3>
+        <p id="resSub" style="font-size: 12px; color: #ec4899; font-weight: 700; margin-bottom: 10px;"></p>
+        <div id="resList"></div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 EduTrack Platforması. SaaS İnterfeys Sistemi.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <strong>Gülzadə Nəzərli ilə Riyaziyyat</strong>
+      <p>&copy; 2026 Təhsil Portalı. Gülzadə Nəzərlinin Akademik İzləmə Platforması. Bütün hüquqlar qorunur.</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    let activeRole = 'student';
+
+    function openLoginModal(role) {
+      setRole(role);
+      document.getElementById('loginModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('loginModal').style.display = 'none';
+      document.getElementById('resultView').style.display = 'none';
+    }
+
+    function setRole(role) {
+      activeRole = role;
+      document.getElementById('tabSt').classList.toggle('active', role === 'student');
+      document.getElementById('tabPr').classList.toggle('active', role === 'parent');
+      document.getElementById('modalCode').placeholder = role === 'student' ? 'Şagird Kodu (Məs: G1234)' : 'Valideyn Kodu (Məs: A1234)';
+    }
+
+    async function fetchResults() {
+      const codeInput = document.getElementById('modalCode');
+      if (!codeInput) return;
+
+      const code = codeInput.value.trim();
+      if (!code) return alert("Zəhmət olmasa PİN kodu yazın!");
+
+      const baseUrl = "http://127.0.0.1:5000";
+      const url = activeRole === 'student' 
+        ? `${baseUrl}/api/login/student` 
+        : `${baseUrl}/api/login/parent`;
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code })
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          renderData(data.student);
+        } else {
+          alert("❌ " + (data.message || "Kod yanlışdır!"));
+        }
+      } catch (err) {
+        console.error("Xəta:", err);
+        alert("⚠️ Serverlə əlaqə qurulmadı. Terminalda 'node server.js' işlədiyinə əmin olun!");
+      }
+    }
+
+    function renderData(student) {
+      const view = document.getElementById('resultView');
+      const name = document.getElementById('resName');
+      const sub = document.getElementById('resSub');
+      const list = document.getElementById('resList');
+
+      view.style.display = 'block';
+
+      if (activeRole === 'student') {
+        name.innerText = student.studentName;
+        sub.innerText = "Sinif: " + student.studentClass;
+      } else {
+        name.innerText = "Hörmətli " + (student.parentName || 'Valideyn');
+        sub.innerText = "Şagird: " + student.studentName + " (" + student.studentClass + ")";
+      }
+
+      list.innerHTML = '';
+      if (!student.scores || student.scores.length === 0) {
+        list.innerHTML = '<p style="font-size: 12px; color: #94a3b8; margin-top:8px;">Hələ heç bir sınaq balı daxil edilməyib.</p>';
+      } else {
+        student.scores.forEach(s => {
+          list.innerHTML += `
+            <div style="background:#fff; border:1px solid #fbcfe8; padding:12px; border-radius:10px; margin-top:8px; font-size:13px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+              <div style="display:flex; justify-content:space-between; font-weight:700;">
+                <span>${s.title}</span>
+                <span style="color:#ec4899;">${s.score} Bal</span>
+              </div>
+              <small style="color:#64748b; display:block; margin-top:4px;">${s.type} • ${s.date}</small>
+            </div>
+          `;
+        });
+      }
+    }
+  </script>
 </body>
 </html>

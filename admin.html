@@ -3,189 +3,376 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Müəllim Paneli — EduTrack</title>
-  <!-- Google Fonts Inter -->
+  <title>EduTrack — Professional Müəllim Paneli</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { 
+      background-color: #fff8f9; 
+      color: #1e293b; 
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+    .container { max-width: 1050px; margin: 0 auto; }
+    
+    /* 🌟 ANIMATIONS */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 4px 20px rgba(236,72,153,0.05); }
+      50% { box-shadow: 0 8px 25px rgba(236,72,153,0.12); }
+      100% { box-shadow: 0 4px 20px rgba(236,72,153,0.05); }
+    }
+
+    /* HEADER */
+    .header-bar { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 30px; 
+      background: #ffffff; 
+      padding: 22px 32px; 
+      border-radius: 20px; 
+      border: 1px solid #fce7f3; 
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.05);
+      animation: fadeInUp 0.5s ease-out;
+    }
+    .header-bar h1 { font-size: 24px; font-weight: 800; color: #1e293b; letter-spacing: -0.5px; }
+    .header-bar h1 span { color: #ec4899; }
+    
+    /* CARDS */
+    .card { 
+      background: #ffffff; 
+      border-radius: 22px; 
+      padding: 32px; 
+      border: 1px solid #fce7f3; 
+      margin-bottom: 30px; 
+      box-shadow: 0 4px 20px rgba(236,72,153,0.04);
+      animation: fadeInUp 0.6s ease-out;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card:hover {
+      box-shadow: 0 15px 35px rgba(236,72,153,0.08);
+      border-color: #fbcfe8;
+    }
+    .card h2 { 
+      font-size: 17px; 
+      font-weight: 700; 
+      color: #1e293b; 
+      margin-bottom: 22px; 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+    }
+    
+    /* FORM INPUTS */
+    .form-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); 
+      gap: 14px; 
+      margin-bottom: 20px; 
+    }
+    input, select { 
+      width: 100%; 
+      padding: 13px 16px; 
+      border-radius: 12px; 
+      background: #fff5f7; 
+      border: 1.5px solid #fbcfe8; 
+      outline: none; 
+      font-size: 14px; 
+      font-weight: 500;
+      color: #1e293b;
+      transition: all 0.3s ease; 
+    }
+    input::placeholder { color: #94a3b8; }
+    input:focus, select:focus { 
+      border-color: #ec4899; 
+      background: #ffffff; 
+      box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.12);
+      transform: translateY(-1px);
+    }
+    
+    /* BUTTONS */
+    .btn { 
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ec4899; 
+      color: #fff; 
+      border: none; 
+      padding: 13px 28px; 
+      border-radius: 12px; 
+      font-weight: 700; 
+      font-size: 14px;
+      cursor: pointer; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+    }
+    .btn:hover { 
+      background: #db2777; 
+      transform: translateY(-3deg); 
+      box-shadow: 0 8px 25px rgba(236, 72, 153, 0.4);
+    }
+    .btn:active { transform: translateY(-1px); }
+    
+    .btn-dark { 
+      background: #1e293b; 
+      box-shadow: 0 4px 15px rgba(30, 41, 59, 0.2);
+    }
+    .btn-dark:hover { 
+      background: #0f172a; 
+      box-shadow: 0 8px 25px rgba(30, 41, 59, 0.3);
+    }
+    
+    .btn-danger { 
+      background: #ffe4e6; 
+      color: #e11d48;
+      padding: 8px 14px; 
+      font-size: 12px; 
+      border-radius: 8px; 
+      box-shadow: none;
+      font-weight: 600;
+    }
+    .btn-danger:hover {
+      background: #f43f5e;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+    }
+
+    /* STUDENT ITEM LIST */
+    .student-item { 
+      background: #ffffff; 
+      border: 1px solid #fce7f3; 
+      padding: 18px 24px; 
+      border-radius: 16px; 
+      margin-bottom: 12px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.4s ease-out;
+    }
+    .student-item:hover {
+      transform: translateX(6px);
+      border-color: #fbcfe8;
+      box-shadow: 0 6px 20px rgba(236, 72, 153, 0.06);
+    }
+    .student-info strong { color: #1e293b; font-size: 16px; font-weight: 700; }
+    .student-info small { color: #64748b; display: block; margin-top: 5px; font-size: 13px; }
+    .badge { 
+      background: #fdf2f8; 
+      color: #ec4899; 
+      padding: 8px 16px; 
+      border-radius: 20px; 
+      font-weight: 700; 
+      font-size: 13px; 
+      border: 1px solid #fbcfe8;
+    }
+  </style>
 </head>
-<body style="background-color: #fff8f9; color: #1e293b; margin: 0; font-family: 'Inter', sans-serif;">
+<body>
 
-  <!-- 1. GİRİŞ ŞİFRƏ PƏNCƏRƏSİ -->
-  <div id="loginSection" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;">
-    <div style="background: #ffffff; border-radius: 16px; padding: 40px; border: 1px solid #fce7f3; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(236, 72, 153, 0.1); text-align: center;">
+<div class="container">
+  
+  <!-- HEADER -->
+  <div class="header-bar">
+    <h1>EduTrack | <span>Müəllim Paneli</span></h1>
+    <a href="index.html" class="btn btn-dark" style="text-decoration:none;">Sayta Qayıt</a>
+  </div>
+
+  <!-- 1. ŞAGİRD QEYDİYYATI -->
+  <div class="card">
+    <h2>👤 1. Yeni Şagird və Valideyn Hesabı Yaradın</h2>
+    <div class="form-grid">
+      <input type="text" id="inpStName" placeholder="Şagirdin Adı Soyadı">
+      <input type="text" id="inpStCode" placeholder="Şagird Kodu (Məs: S101)">
+      <input type="text" id="inpPrName" placeholder="Valideynin Adı">
+      <input type="text" id="inpPrCode" placeholder="Valideyn Kodu (Məs: V101)">
       
-      <div style="margin-bottom: 25px;">
-        <div style="width: 50px; height: 50px; background: #fbcfe8; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto;">
-          <span style="font-size: 24px;">🔒</span>
-        </div>
-        <h2 style="margin: 0; font-size: 22px; color: #1e293b;">Müəllim Girişi</h2>
-        <p style="margin: 5px 0 0 0; color: #64748b; font-size: 13px;">Gülzadə Nəzərli — İdarəetmə Paneli</p>
-      </div>
+      <!-- 🌟 5-DƏN 11-Ə QƏDƏR SİNİFLƏR -->
+      <select id="inpClass">
+        <optgroup label="Buraxılış & DİM Hazırlığı">
+          <option value="11-ci Sinif (DİM)">11-ci Sinif (DİM Hazırlığı)</option>
+          <option value="10-cu Sinif (DİM)">10-cu Sinif (DİM Hazırlığı)</option>
+          <option value="9-cu Sinif (Buraxılış)">9-cu Sinif (Buraxılış)</option>
+        </optgroup>
+        <optgroup label="Orta Məktəb (Baza)">
+          <option value="8-ci Sinif">8-ci Sinif</option>
+          <option value="7-ci Sinif">7-ci Sinif</option>
+          <option value="6-cı Sinif">6-cı Sinif</option>
+          <option value="5-ci Sinif">5-ci Sinif</option>
+        </optgroup>
+      </select>
+    </div>
+    <button class="btn" onclick="createNewStudent()">✨ Hesab Yarad</button>
+  </div>
 
-      <form id="loginForm" onsubmit="handleLogin(event)">
-        <div style="margin-bottom: 20px; text-align: left;">
-          <label for="adminPassword" style="display: block; color: #475569; font-size: 13px; margin-bottom: 8px;">Giriş Kodu / PİN Kod:</label>
-          <input type="password" id="adminPassword" placeholder="Kod adını daxil edin..." required style="width: 100%; padding: 12px 14px; border-radius: 8px; background: #fff5f7; border: 1px solid #fbcfe8; color: #1e293b; font-size: 14px; box-sizing: border-box; outline: none;">
-        </div>
+  <!-- 2. SİNAQ BALI DAXİL ET -->
+  <div class="card">
+    <h2>📝 2. Sınaq Balı Daxil Et (Həftəlik / Aylıq)</h2>
+    <div class="form-grid">
+      <select id="selectStudent">
+        <option value="">Şagirdi Seçin...</option>
+      </select>
+      <select id="selectType">
+        <option value="Həftəlik Sınaq">Həftəlik Sınaq</option>
+        <option value="Aylıq Sınaq">Aylıq Sınaq</option>
+        <option value="DİM Sınağı">DİM Sınağı</option>
+        <option value="Mövzu Sınağı">Mövzu Qiymətləndirmə</option>
+      </select>
+      <input type="text" id="inpTitle" placeholder="Sınaq Mövusu (Məs: Törəmə / Triqonometriya)">
+      <input type="number" id="inpScore" placeholder="Bal (0-100)" min="0" max="100">
+    </div>
+    <button class="btn btn-dark" onclick="addStudentScore()">🎯 Balı Yaz</button>
+  </div>
 
-        <div id="errorMessage" style="display: none; color: #ef4444; background: #fee2e2; padding: 10px; border-radius: 6px; font-size: 12px; margin-bottom: 15px; border: 1px solid #fca5a5;">
-          ❌ Kod yanlışdır! Yenidən cəhd edin.
-        </div>
-
-        <button type="submit" style="width: 100%; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: #ec4899; color: #fff; border: none; box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);">
-          Sistemə Daxil Ol
-        </button>
-      </form>
-
-      <div style="margin-top: 20px;">
-        <a href="index.html" style="color: #64748b; font-size: 12px; text-decoration: none;">← Ana Səhifəyə Qayıt</a>
-      </div>
+  <!-- 3. SİYAHI -->
+  <div class="card">
+    <h2>📋 Qeydiyyatda Olan Şagirdlər və Nəticələr</h2>
+    <div id="studentListContainer">
+      <p style="text-align:center; color:#64748b; padding:20px;">Məlumatlar yüklənir...</p>
     </div>
   </div>
 
+</div>
 
-  <!-- 2. MÜƏLLİM İDARƏETMƏ PANELSİ -->
-  <div id="dashboardSection" style="display: none; padding-top: 80px;">
-    
-    <!-- Top Navbar -->
-    <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: #ffffff; border-bottom: 1px solid #fce7f3; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto;">
-        <a href="index.html" style="color: #1e293b; font-weight: bold; text-decoration: none; font-size: 20px;">
-          EduTrack <span style="font-size: 12px; color: #ec4899; font-weight: normal;">| Müəllim Paneli</span>
-        </a>
-        <div>
-          <span style="color: #475569; font-size: 14px; margin-right: 15px;">Xoş gəldiniz, <strong>Gülzadə Müəllim</strong></span>
-          <button onclick="logout()" style="padding: 6px 16px; border: 1px solid #ec4899; color: #ec4899; background: transparent; border-radius: 6px; cursor: pointer; font-weight: 500;">Çıxış Et</button>
-        </div>
-      </div>
-    </header>
+<script>
+  const API_URL = "http://127.0.0.1:5000/api";
 
-    <!-- Main Content -->
-    <main style="max-width: 1200px; margin: 0 auto; padding: 20px;">
-      
-      <!-- Top Title Box -->
-      <div style="background: #ffffff; border-radius: 12px; padding: 24px; margin-bottom: 25px; border: 1px solid #fce7f3; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.05);">
-        <h2 style="margin: 0 0 10px 0; font-size: 22px; color: #1e293b;">Şagirdlərin Qiymətləndirilməsi və Monitorinq</h2>
-        <p style="color: #64748b; font-size: 14px; margin: 0;">Sınaq ballarını daxil edin. (50 ballıq filtir sistem tərəfindən avtomatik yoxlanılır)</p>
-      </div>
+  document.addEventListener("DOMContentLoaded", fetchAllStudents);
 
-      <!-- Form -->
-      <div style="background: #ffffff; border-radius: 12px; padding: 20px; border: 1px solid #fce7f3; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.05);">
-        <h3 style="margin-top: 0; font-size: 16px; color: #ec4899;">➕ Yeni Sınaq Balı Daxil Et</h3>
-        <form onsubmit="addStudentScore(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px;">
-          <input type="text" id="studentName" placeholder="Şagirdin Adı Soyadı" required style="padding: 10px 14px; border-radius: 6px; background: #fff5f7; border: 1px solid #fbcfe8; color: #1e293b; outline: none;">
-          <select id="studentClassSelect" style="padding: 10px 14px; border-radius: 6px; background: #fff5f7; border: 1px solid #fbcfe8; color: #1e293b; outline: none; cursor: pointer;">
-            <option>6-cı Sinif</option>
-            <option>7-ci Sinif</option>
-            <option>8-ci Sinif</option>
-            <option>9-cu Sinif (DİM)</option>
-            <option>10-cu Sinif (DİM)</option>
-            <option>11-ci Sinif (DİM)</option>
-          </select>
-          <input type="number" id="studentScore" placeholder="Bal (0 - 100)" min="0" max="100" required style="padding: 10px 14px; border-radius: 6px; background: #fff5f7; border: 1px solid #fbcfe8; color: #1e293b; outline: none;">
-          <button type="submit" style="padding: 10px; background: #ec4899; color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Yadda Saqla</button>
-        </form>
-      </div>
+  async function fetchAllStudents() {
+    try {
+      const res = await fetch(`${API_URL}/students`);
+      const students = await res.json();
+      renderUI(students);
+    } catch (err) {
+      console.error(err);
+      document.getElementById('studentListContainer').innerHTML = 
+        '<p style="color:#ef4444; text-align:center; padding:20px;">⚠️ Serverlə əlaqə qurulmadı. Terminalda "node server.js" işlədiyindən əmin olun!</p>';
+    }
+  }
 
-      <!-- CƏDVƏL -->
-      <div style="background: #ffffff; border-radius: 12px; padding: 20px; border: 1px solid #fce7f3; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.05);">
-        <h3 style="margin-top: 0; font-size: 16px; color: #1e293b; margin-bottom: 15px;">📋 Daxil Edilmiş Şagird Nəticələri</h3>
-        
-        <table style="width: 100%; text-align: left; border-collapse: collapse; color: #475569; font-size: 14px;">
-          <thead>
-            <tr style="border-bottom: 2px solid #fce7f3; color: #1e293b;">
-              <th style="padding: 10px;">Şagird Adı</th>
-              <th>Sinif</th>
-              <th>Sınaq Balı</th>
-              <th>Keyfiyyət Filtri Statusu (50 Bal)</th>
-              <th>Əməliyyat</th>
-            </tr>
-          </thead>
-          <tbody id="studentTableBody">
-          </tbody>
-        </table>
-      </div>
+  // 1. Yeni Şagird Yarat
+  async function createNewStudent() {
+    const studentName = document.getElementById('inpStName').value.trim();
+    const studentCode = document.getElementById('inpStCode').value.trim();
+    const parentName = document.getElementById('inpPrName').value.trim();
+    const parentCode = document.getElementById('inpPrCode').value.trim();
+    const studentClass = document.getElementById('inpClass').value;
 
-    </main>
-  </div>
-
-
-  <!-- JavaScript -->
-  <script>
-    let students = [
-      { name: "Aysu Əliyeva", class: "11-ci Sinif (DİM)", score: 84 },
-      { name: "Murad Məmmədov", class: "9-cu Sinif (DİM)", score: 45 },
-      { name: "Leyla Həsənova", class: "7-ci Sinif", score: 92 }
-    ];
-
-    function handleLogin(event) {
-      event.preventDefault();
-      const CORRECT_PASSWORD = "tetiklenmek1234";
-      const inputPassword = document.getElementById('adminPassword').value;
-      const errorMessage = document.getElementById('errorMessage');
-
-      if (inputPassword.trim() === CORRECT_PASSWORD) {
-        document.getElementById('loginSection').style.display = 'none';
-        document.getElementById('dashboardSection').style.display = 'block';
-        renderTable();
-      } else {
-        errorMessage.style.display = 'block';
-      }
+    if (!studentName || !studentCode || !parentCode) {
+      return alert("Zəhmət olmasa şagird adı, şagird kodu və valideyn kodunu yazın!");
     }
 
-    function logout() {
-      document.getElementById('loginSection').style.display = 'flex';
-      document.getElementById('dashboardSection').style.display = 'none';
-      document.getElementById('adminPassword').value = '';
-      document.getElementById('errorMessage').style.display = 'none';
-    }
-
-    function renderTable() {
-      const tbody = document.getElementById('studentTableBody');
-      tbody.innerHTML = '';
-
-      students.forEach((student, index) => {
-        const isPassed = student.score >= 50;
-        const statusBadge = isPassed 
-          ? `<span style="background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold;">✅ Keçdi (>50)</span>`
-          : `<span style="background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold;">⚠️ Risk (<50 Limit)</span>`;
-
-        const row = `
-          <tr style="border-bottom: 1px solid #fce7f3;">
-            <td style="padding: 12px 10px; color: #1e293b; font-weight: 500;">${student.name}</td>
-            <td>${student.class}</td>
-            <td style="font-weight: bold; color: ${isPassed ? '#166534' : '#ef4444'};">${student.score} Bal</td>
-            <td>${statusBadge}</td>
-            <td><button onclick="deleteStudent(${index})" style="background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 13px;">Sil</button></td>
-          </tr>
-        `;
-        tbody.innerHTML += row;
+    try {
+      const res = await fetch(`${API_URL}/students`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ studentName, studentCode, parentName, parentCode, studentClass })
       });
-    }
 
-    function addStudentScore(event) {
-      event.preventDefault();
-      const name = document.getElementById('studentName').value;
-      const studentClass = document.getElementById('studentClassSelect').value;
-      const score = parseInt(document.getElementById('studentScore').value);
-
-      students.unshift({ name, class: studentClass, score });
-      renderTable();
-
-      document.getElementById('studentName').value = '';
-      document.getElementById('studentScore').value = '';
-      alert("Şagird balı uğurla daxil edildi!");
-    }
-
-    function deleteStudent(index) {
-      if(confirm("Bu məlumatı silmək istədiyinizdən əminsiniz?")) {
-        students.splice(index, 1);
-        renderTable();
+      if (res.ok) {
+        alert("✅ Şagird uğurla daxil edildi!");
+        document.getElementById('inpStName').value = '';
+        document.getElementById('inpStCode').value = '';
+        document.getElementById('inpPrName').value = '';
+        document.getElementById('inpPrCode').value = '';
+        fetchAllStudents();
+      } else {
+        alert("❌ Xəta yarandı!");
       }
+    } catch (err) {
+      alert("⚠️ Serverlə əlaqə xətası!");
     }
-  </script>
+  }
+
+  // 2. Sınaq Balı Əlavə Et
+  async function addStudentScore() {
+    const studentId = document.getElementById('selectStudent').value;
+    const type = document.getElementById('selectType').value;
+    const title = document.getElementById('inpTitle').value.trim();
+    const score = document.getElementById('inpScore').value.trim();
+
+    if (!studentId || !title || !score) {
+      return alert("Zəhmət olmasa şagirdi seçin, mövzunu və balı yazın!");
+    }
+
+    try {
+      const res = await fetch(`${API_URL}/students/score`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ studentId, type, title, score })
+      });
+
+      if (res.ok) {
+        alert("✅ Sınaq balı qeyd edildi!");
+        document.getElementById('inpTitle').value = '';
+        document.getElementById('inpScore').value = '';
+        fetchAllStudents();
+      }
+    } catch (err) {
+      alert("⚠️ Bal əlavə edilərkən xəta yarandı!");
+    }
+  }
+
+  // 3. Şagirdi Sil
+  async function deleteStudent(id) {
+    if (!confirm("Bu şagirdi silməyə əminsiniz?")) return;
+    try {
+      const res = await fetch(`${API_URL}/students/${id}`, { method: "DELETE" });
+      if (res.ok) {
+        fetchAllStudents();
+      }
+    } catch (err) {
+      alert("Silinmə zamanı xəta oldu!");
+    }
+  }
+
+  // UI RENDER
+  function renderUI(students) {
+    const select = document.getElementById('selectStudent');
+    const container = document.getElementById('studentListContainer');
+
+    select.innerHTML = '<option value="">Şagirdi Seçin...</option>';
+    students.forEach(s => {
+      select.innerHTML += `<option value="${s.id}">${s.studentName} (${s.studentCode})</option>`;
+    });
+
+    if (students.length === 0) {
+      container.innerHTML = '<p style="text-align:center; color:#64748b; padding:20px;">Hələ heç bir şagird daxil edilməyib.</p>';
+      return;
+    }
+
+    container.innerHTML = '';
+    students.forEach(s => {
+      const lastScore = s.scores && s.scores.length > 0 
+        ? `${s.scores[0].score} Bal (${s.scores[0].title})` 
+        : 'Sınaq yoxdur';
+
+      container.innerHTML += `
+        <div class="student-item">
+          <div class="student-info">
+            <strong>${s.studentName}</strong> 
+            <span style="color:#ec4899; font-weight:700; font-size:12px; margin-left:6px;">[Kod: ${s.studentCode}]</span>
+            <small>Valideyn: ${s.parentName || 'Qeyd olunmayıb'} (Kod: ${s.parentCode}) • Sinif: ${s.studentClass}</small>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span class="badge">${lastScore}</span>
+            <button class="btn btn-danger" onclick="deleteStudent('${s.id}')">Sil</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+</script>
 
 </body>
 </html>
